@@ -7,9 +7,11 @@ import fitz
 
 cli = argparse.ArgumentParser()
 cli.add_argument('-i', '--input', help='PDF path', required=True)
-cli.add_argument('-o', '--output', default='./out/Cleaned', help='Output folder')
+cli.add_argument('-o', '--output', default='Cleaned', help='Output folder')
 args = cli.parse_args()
-Path(args.output).mkdir(parents=True, exist_ok=True)
+
+folder_out = f'./out/{args.output}'
+Path(folder_out).mkdir(parents=True, exist_ok=True)
 
 # Open pdf
 dirty_doc = fitz.open(args.input)
@@ -29,7 +31,7 @@ for page in dirty_doc:
         img = dirty_doc.extract_image(image[0])
         # Skip spammy images
         if img["image"] not in blacklist:
-            with open(f'{args.output}/{i}.{img["ext"]}', 'wb') as f:
+            with open(f'{folder_out}/{i}.{img["ext"]}', 'wb') as f:
                 f.write(img['image'])
                 i += 1
 
