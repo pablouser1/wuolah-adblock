@@ -1,12 +1,12 @@
 # Wuolah Adblock
-This program removes all ads from downloaded pdfs, for now it only works with pdfs containing images.
+Este programa elimina todos los anuncios de los pdfs de Wuolah, por ahora solo funciona con pdfs conteniendo imágenes
 
-# Installation
+# Instalación
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-# Running
+# Cómo usar
 ```bash
 python main.py -i NAME.pdf -o OUTPUT_DIR
 ```
