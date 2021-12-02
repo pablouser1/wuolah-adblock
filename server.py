@@ -27,7 +27,7 @@ async def clear(request: Request)-> HTTPResponse:
         return raw(doc.write(), content_type='application/pdf', headers={
             'Content-Disposition': 'attachment; filename="Wuolah-Limpio.pdf"'
         })
-    return redirect('/error')
+    return redirect('/error', status=500)
 
 @app.get("/error")
 async def error(request: Request) -> HTTPResponse:
