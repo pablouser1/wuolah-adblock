@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <title>Home - Wuolah Adblock</title>
+</head>
+
+<body>
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <p class="title">Bienvenido a Wuolah Adblock</p>
+        <p class="subtitle">Elimina los anuncios de los pdfs de Wuolah facilmente</p>
+        <form action="./clear" method="post" enctype="multipart/form-data">
+          <div class="field">
+            <div class="control">
+              <div class="file has-name is-boxed is-centered">
+                <label class="file-label">
+                  <input id="file-input" class="file-input" type="file" name="pdf" accept="application/pdf">
+                  <span class="file-cta">
+                    <span class="file-label">
+                      Elige un archivo
+                    </span>
+                  </span>
+                  <span id="file-name" class="file-name">
+                    Ningún archivo selecionado
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button type="submit" class="button is-success">Enviar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            Hecho con <span style="color: #e25555;">&#9829;</span> en Github
+          </p>
+            <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
+              <ul>
+                <li><a href="about">Acerca de</a></li>
+                <li><a href="https://github.com/pablouser1/wuolah-adblock">Código fuente</a></li>
+              </ul>
+            </nav>
+        </div>
+      </footer>
+    </div>
+  </section>
+  <script>
+    // Name changing input
+    const fileInput = document.getElementById('file-input');
+    fileInput.onchange = () => {
+      if (fileInput.files.length > 0) {
+        const fileName = document.getElementById('file-name');
+        fileName.textContent = fileInput.files[0].name;
+      }
+    }
+  </script>
+</body>
+
+</html>
