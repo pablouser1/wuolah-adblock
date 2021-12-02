@@ -1,3 +1,4 @@
+from typing import Union
 from sanic import Sanic
 from sanic.response import HTTPResponse, html, redirect, raw
 from sanic.request import Request
@@ -7,7 +8,7 @@ from wuolah_adblock.cleaned import createCleaned
 
 app = Sanic("Wuolah-Adblock")
 
-def readHTML(html_path: str):
+def readHTML(html_path: str)-> Union[bytes, str]:
     f = open(html_path)
     file_html = f.read()
     f.close()
@@ -38,4 +39,4 @@ async def about(request: Request) -> HTTPResponse:
 
 # Debug mode
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="127.0.0.1", port=8000, debug=True)

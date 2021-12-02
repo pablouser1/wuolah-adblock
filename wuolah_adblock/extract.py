@@ -1,7 +1,7 @@
 import fitz
 from wuolah_adblock.blacklist import getBlacklist
 
-def extractImages(file_bytes):
+def extractImages(file_bytes)-> list:
     """
     Extracts images not blacklisted from a pdf
     """
