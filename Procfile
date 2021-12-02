@@ -1,1 +1,1 @@
-web: uvicorn server:app --workers 4
+web: gunicorn server:app
