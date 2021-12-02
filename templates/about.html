@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -14,6 +14,7 @@
     <div class="hero-body">
       <div class="container">
         <p class="title">Acerca de</p>
+        <p class="subtitle">Información del proyecto y preguntas frecuentes</p>
       </div>
     </div>
   </section>
@@ -25,8 +26,22 @@
       <p>Si tienes algún problema con el programa, abre una <a
           href="https://github.com/pablouser1/wuolah-adblock/issues">issue</a> en Github</p>
       <h2>FAQ</h2>
-      <h3>¿Qué acepta este proyecto?</h3>
-      <p>Este programa acepta todos los pdfs de Wuolah con anuncios que no contengan otro pdf incrustado.</p>
+      <h3>Siguen habiendo anuncios en alguna(s) página(s)</h3>
+      <p>
+        Este programa funciona con un sistema de lista negra, es decir,
+        el programa extrae todas las imágenes disponibles y omite las que están en la lista negra.
+        <br />
+        Si ves un anuncio puede ser porque esa imagen en específico aún no está en la lista negra y será incluida pronto.
+      </p>
+      <h3>El pdf sale vacío / No salen los apuntes</h3>
+      <p>
+        Lo más probable es que el documento original (el subido por el usuario antes de ser modificado por Wuolah con los anuncios)
+        no contenía imágenes, sino un documento pdf.
+        <br />
+        Esta situación aun no está soportada. Sólo se aceptan documentos que contengan imágenes incrustadas.
+      </p>
+      <h3>¿Existe una aplicación de escritorio de este programa?</h3>
+      <p>Sí, puedes usar wuolah-adblock sin necesidad de la web, más información el el repositorio del proyecto.</p>
     </div>
   </section>
 </body>

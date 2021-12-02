@@ -28,6 +28,10 @@ async def clear(request: Request)-> HTTPResponse:
         })
     return redirect('/error')
 
+@app.get("/error")
+async def error(request: Request) -> HTTPResponse:
+    return html(readHTML('./templates/error.html'))
+
 @app.get("/about")
 async def about(request: Request) -> HTTPResponse:
     return html(readHTML('./templates/about.html'))
