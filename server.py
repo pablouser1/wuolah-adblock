@@ -32,5 +32,6 @@ async def clear(request: Request)-> HTTPResponse:
 async def about(request: Request) -> HTTPResponse:
     return html(readHTML('./templates/about.html'))
 
+# Debug mode
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
