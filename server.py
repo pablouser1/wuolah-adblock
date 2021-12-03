@@ -1,4 +1,3 @@
-from typing import Union
 from sanic import Sanic
 from sanic.request import Request
 from sanic.response import HTTPResponse, raw

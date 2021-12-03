@@ -9,7 +9,6 @@ def createCleaned(whitelist_images: list)-> fitz.Document:
         'creator': 'Wuolah (https://wuolah.com)',
         'producer': 'wuolah-adblock (https://github.com/pablouser1/wuolah-adblock)'
     })
-    i = 0
     for whitelist_image in whitelist_images:
         img = fitz.open(stream=whitelist_image['image'], filetype=whitelist_image['ext'])
         rect = img[0].rect
@@ -19,5 +18,5 @@ def createCleaned(whitelist_images: list)-> fitz.Document:
         page = doc.new_page(width = rect.width, height = rect.height)
         page.show_pdf_page(rect, imgPDF, 0)
         imgPDF.close()
-    
+
     return doc
