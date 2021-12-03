@@ -1,7 +1,8 @@
 from typing import Union
 from sanic import Sanic
-from sanic.response import HTTPResponse, redirect, raw
 from sanic.request import Request
+from sanic.response import HTTPResponse, raw
+from sanic.exceptions import InvalidUsage
 
 from wuolah_adblock.extract import extractImages
 from wuolah_adblock.cleaned import createCleaned
@@ -10,9 +11,8 @@ app = Sanic("Wuolah-Adblock")
 
 app.static('/', './templates/home.html',  name='home')
 app.static('/about', './templates/about.html', name='about')
-app.static('/error', './templates/error.html', name='error')
 
-@app.post("clear")
+@app.post("/clear", error_format="html")
 async def clear(request: Request)-> HTTPResponse:
     if request.files.get('pdf') and request.files.get('pdf').type == 'application/pdf':
         pdf = request.files.get('pdf')
@@ -21,7 +21,7 @@ async def clear(request: Request)-> HTTPResponse:
         return raw(doc.write(), content_type='application/pdf', headers={
             'Content-Disposition': 'attachment; filename="Wuolah-Limpio.pdf"'
         })
-    return redirect('/error', status=500)
+    raise InvalidUsage("Ha habido un error al procesar la solicitud. ¿Has elegido un archivo pdf válido?")
 
 # Debug mode
 if __name__ == "__main__":
