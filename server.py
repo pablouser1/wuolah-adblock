@@ -1,6 +1,6 @@
 from typing import Union
 from sanic import Sanic
-from sanic.response import HTTPResponse, html, redirect, raw
+from sanic.response import HTTPResponse, redirect, raw
 from sanic.request import Request
 
 from wuolah_adblock.extract import extractImages
@@ -8,15 +8,9 @@ from wuolah_adblock.cleaned import createCleaned
 
 app = Sanic("Wuolah-Adblock")
 
-def readHTML(html_path: str)-> Union[bytes, str]:
-    f = open(html_path)
-    file_html = f.read()
-    f.close()
-    return file_html
-
-@app.get("/")
-async def home(request: Request)-> HTTPResponse:
-    return html(readHTML('./templates/home.html'))
+app.static('/', './templates/home.html',  name='home')
+app.static('/about', './templates/about.html', name='about')
+app.static('/error', './templates/error.html', name='error')
 
 @app.post("clear")
 async def clear(request: Request)-> HTTPResponse:
@@ -28,14 +22,6 @@ async def clear(request: Request)-> HTTPResponse:
             'Content-Disposition': 'attachment; filename="Wuolah-Limpio.pdf"'
         })
     return redirect('/error', status=500)
-
-@app.get("/error")
-async def error(request: Request) -> HTTPResponse:
-    return html(readHTML('./templates/error.html'))
-
-@app.get("/about")
-async def about(request: Request) -> HTTPResponse:
-    return html(readHTML('./templates/about.html'))
 
 # Debug mode
 if __name__ == "__main__":
