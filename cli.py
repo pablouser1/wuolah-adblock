@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 import argparse
+import sys
 from pathlib import Path
 from wuolah_adblock.extract import extractImages
 from wuolah_adblock.cleaned import createCleaned
+
+error = {
+    'status': False,
+    'message': None
+}
 
 cli = argparse.ArgumentParser()
 cli.add_argument('-i', '--input', help='PDF path', required=True)
@@ -15,18 +21,28 @@ pdf_bytes = f.read()
 f.close()
 
 images = extractImages(pdf_bytes)
-
-if args.pdf:
-    folder_out = f'./out/{args.output}'
-    Path(folder_out).mkdir(parents=True, exist_ok=True)
-    i = 0
-    for img in images:
-        with open(f'{folder_out}/{i}.{img["ext"]}', 'wb') as f:
-            f.write(img['image'])
-            i += 1
+if len(images) > 0:
+    if args.pdf:
+        # Create pdf
+        doc = createCleaned(images)
+        doc.save(f'./out/{args.output}.pdf')
+        doc.close()
+    else:
+        # Create folder with all the images
+        folder_out = f'./out/{args.output}'
+        Path(folder_out).mkdir(parents=True, exist_ok=True)
+        i = 0
+        for img in images:
+            with open(f'{folder_out}/{i}.{img["ext"]}', 'wb') as f:
+                f.write(img['image'])
+                i += 1
 else:
-    doc = createCleaned(images)
-    doc.save(f'./out/{args.output}.pdf')
-    doc.close()
+    error['status'] = True
+    error['message'] = 'The cleaned PDF document could not be created. Maybe you used a document that did not contain images?'
+
+# Throw error if any
+if error['status']:
+    print(f'There was an error: {error["message"]}')
+    sys.exit(1)
 
 print("DONE")

@@ -16,10 +16,12 @@ async def clear(request: Request)-> HTTPResponse:
     if request.files.get('pdf') and request.files.get('pdf').type == 'application/pdf':
         pdf = request.files.get('pdf')
         images = extractImages(pdf.body)
-        doc = createCleaned(images)
-        return raw(doc.write(), content_type='application/pdf', headers={
-            'Content-Disposition': 'attachment; filename="Wuolah-Limpio.pdf"'
-        })
+        if len(images) > 0:
+            doc = createCleaned(images)
+            return raw(doc.write(), content_type='application/pdf', headers={
+                'Content-Disposition': 'attachment; filename="Wuolah-Limpio.pdf"'
+            })
+        raise InvalidUsage('No se ha podido extraer ninguna imagen. ¿El documento realmente contiene imágenes incrustadas?')
     raise InvalidUsage("Ha habido un error al procesar la solicitud. ¿Has elegido un archivo pdf válido?")
 
 # Debug mode
