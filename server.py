@@ -18,7 +18,9 @@ async def clear(request: Request)-> HTTPResponse:
         images = extractImages(pdf.body)
         if len(images) > 0:
             doc = createCleaned(images)
-            return raw(doc.write(), content_type='application/pdf', headers={
+            out = doc.write()
+            doc.close()
+            return raw(out, content_type='application/pdf', headers={
                 'Content-Disposition': 'attachment; filename="Wuolah-Limpio.pdf"'
             })
         raise InvalidUsage('No se ha podido extraer ninguna imagen. ¿El documento realmente contiene imágenes incrustadas?')
