@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 from wuolah_adblock.extract import extractImages
 from wuolah_adblock.cleaned import createCleaned
+from wuolah_adblock.blacklist import getBlacklist
 
 error = {
     'status': False,
@@ -19,8 +20,8 @@ args = cli.parse_args()
 f = open(args.input, 'rb')
 pdf_bytes = f.read()
 f.close()
-
-images = extractImages(pdf_bytes)
+blacklist = getBlacklist()
+images = extractImages(pdf_bytes, blacklist)
 if len(images) > 0:
     if args.pdf:
         # Create pdf

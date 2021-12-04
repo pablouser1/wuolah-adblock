@@ -5,9 +5,11 @@ from sanic.exceptions import InvalidUsage
 
 from wuolah_adblock.extract import extractImages
 from wuolah_adblock.cleaned import createCleaned
+from wuolah_adblock.blacklist import getBlacklist
+
+blacklist = getBlacklist()
 
 app = Sanic("Wuolah-Adblock")
-
 app.static('/', './templates/home.html',  name='home')
 app.static('/about', './templates/about.html', name='about')
 
@@ -15,7 +17,7 @@ app.static('/about', './templates/about.html', name='about')
 async def clear(request: Request)-> HTTPResponse:
     if request.files.get('pdf') and request.files.get('pdf').type == 'application/pdf':
         pdf = request.files.get('pdf')
-        images = extractImages(pdf.body)
+        images = extractImages(pdf.body, blacklist)
         if len(images) > 0:
             doc = createCleaned(images)
             out = doc.write()

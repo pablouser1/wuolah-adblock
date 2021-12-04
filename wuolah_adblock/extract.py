@@ -1,12 +1,11 @@
 import fitz
 from wuolah_adblock.blacklist import getBlacklist
 
-def extractImages(file_bytes)-> list:
+def extractImages(file_bytes, blacklist: list)-> list:
     """
     Extracts images not blacklisted from a pdf
     """
     whitelist_images = []
-    blacklist = getBlacklist()
     # Open pdf
     dirty_doc = fitz.open(stream=file_bytes, filetype="pdf")
     for page in dirty_doc:
