@@ -8,9 +8,8 @@ from wuolah_adblock.Extract import Extract
 from wuolah_adblock.Build import Build
 
 app = Sanic('Wuolah-Adblock')
-app.static('/', './templates/home.html',  name='home')
-app.static('/about', './templates/about.html', name='about')
 app.ctx.blacklist = Blacklist.fromFile()
+app.static('/', './templates/home.html',  name='home')
 
 @app.post("/clear", error_format="html")
 async def clear(request: Request)-> HTTPResponse:
