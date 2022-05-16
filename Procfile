@@ -1,1 +1,1 @@
-web: gunicorn -k uvicorn.workers.UvicornWorker server:app -b 0.0.0.0:${PORT}
+web: gunicorn server:app -k gthread -b 0.0.0.0:${PORT}

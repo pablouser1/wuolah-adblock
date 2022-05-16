@@ -10,10 +10,11 @@ error = {
     'message': None
 }
 
+cli = argparse.ArgumentParser()
+cli.add_argument('input', help='PDF path')
+cli.add_argument('--pdf', default=False, action="store_true", help="Store it as images instead of a pdf")
+
 if __name__ == '__main__':
-    cli = argparse.ArgumentParser()
-    cli.add_argument('input', help='PDF path')
-    cli.add_argument('--pdf', default=False, action="store_true", help="Store it as images instead of a pdf")
     args = cli.parse_args()
     blacklist = Blacklist.fromFile()
     path = Path(args.input)
