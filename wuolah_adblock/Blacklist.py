@@ -1,7 +1,8 @@
 class Blacklist:
     BLACKLIST_FILE = './data/blacklist.txt'
+
     @staticmethod
-    def fromFile()-> list:
+    def fromFile() -> list:
         hashes = []
         with open(Blacklist.BLACKLIST_FILE) as f:
             data = f.read()

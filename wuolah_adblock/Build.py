@@ -1,8 +1,9 @@
 import fitz
 
+
 class Build:
     @staticmethod
-    def pdf(whitelist_images: list)-> fitz.Document:
+    def pdf(whitelist_images: list) -> fitz.Document:
         """
         Create a new pdf from images
         """
@@ -17,7 +18,7 @@ class Build:
             pdfbytes = img.convert_to_pdf()
             img.close()
             imgPDF = fitz.open("pdf", pdfbytes)
-            page = doc.new_page(width = rect.width, height = rect.height)
+            page = doc.new_page(width=rect.width, height=rect.height)
             page.show_pdf_page(rect, imgPDF, 0)
             imgPDF.close()
 

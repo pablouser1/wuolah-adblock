@@ -38,7 +38,8 @@ if __name__ == '__main__':
                     i += 1
     else:
         error['status'] = True
-        error['message'] = 'The cleaned PDF document could not be created. Maybe you used a document that did not contain images?'
+        error['message'] = 'The cleaned PDF document could not be created.' \
+                           'Maybe you used a document that did not contain images?'
 
     # Throw error if any
     if error['status']:

@@ -1,5 +1,4 @@
 from bottle import Bottle, request, response, HTTPError, static_file
-from os.path import splitext
 from io import BytesIO
 
 from wuolah_adblock.Blacklist import Blacklist
@@ -10,9 +9,11 @@ app = Bottle()
 
 blacklist = Blacklist.fromFile()
 
+
 @app.get('/')
 def home():
     return static_file('home.html', './views')
+
 
 @app.post('/clear')
 def clear():
@@ -34,8 +35,10 @@ def clear():
             doc.close()
             file_bytes.close()
             return out
-        return HTTPError(400, 'No se ha podido extraer ninguna imagen. ¿El documento realmente contiene imágenes incrustadas?')
+        return HTTPError(400, 'No se ha podido extraer ninguna imagen. ¿El documento realmente contiene imágenes '
+                              'incrustadas?')
     return HTTPError(400, "Ha habido un error al procesar la solicitud. ¿Has elegido un archivo pdf válido?")
+
 
 # Debug mode
 if __name__ == "__main__":
